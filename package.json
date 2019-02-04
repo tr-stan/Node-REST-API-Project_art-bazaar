@@ -1,0 +1,28 @@
+{
+  "name": "print-original-bazaar",
+  "version": "1.0.0",
+  "description": "e-commerce app for selling/buying art, both original pieces and prints",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo 'Merhaba arkadaslar'",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tri-be/print-original-bazaar.git"
+  },
+  "author": "Tristan Bennett",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tri-be/print-original-bazaar/issues"
+  },
+  "homepage": "https://github.com/tri-be/print-original-bazaar#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "compression": "^1.7.3",
+    "express": "^4.16.4",
+    "morgan": "^1.9.1",
+    "nodemon": "^1.18.9",
+    "pg": "^7.8.0"
+  }
+}
