@@ -16,9 +16,9 @@
 -- 	(5, 'Lance', 'Schexnaydre', 'schex@artsea.com', '17three71'),
 -- 	(6, 'Tyler', 'Lane', 'lane@artsea.com', '18two81')
 
-INSERT INTO Products (name, artist, category, is_print, price, description)
-VALUES
-	('Céline Arnaud', 1, 'painting', true, 90000.00, 'A beautiful cubist portrait of a lady.')
+-- INSERT INTO Products (name, artist, category, is_print, price, description)
+-- VALUES
+-- 	('Céline Arnaud', 1, 'painting', true, 90000.00, 'A beautiful cubist portrait of a lady.')
 
 -- INSERT INTO Cart (user_id, product_id, product_quantity)
 -- VALUES

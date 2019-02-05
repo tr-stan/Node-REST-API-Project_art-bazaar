@@ -1,4 +1,5 @@
 const express = require('express')
+const bodyParser = require('body-parser')
 const { Client } = require('pg')
 const morgan = require('morgan')
 const compression = require('compression')
