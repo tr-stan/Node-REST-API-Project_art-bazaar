@@ -55,7 +55,7 @@ router.post('/', (request, response) => {
 
 })
 
-// Update one products
+// Update one product
 router.put('/:id', (request, response) => {
     let text = 'UPDATE Products SET name = $1, artist = $2, category = $3, is_print = $4, price = $5, description = $6 WHERE id = $7'
     let index = request.params.id
@@ -71,11 +71,11 @@ router.put('/:id', (request, response) => {
         })
 })
 
-// // Delete < unsure what to do
+// Delete one product
 router.delete('/:id', (request, response) => {
 	let index = request.params.id
 	client.query(`DELETE from Products WHERE Products.id = ${index}`)
-		.then( result => response.send(result.rows[0]))
+		.then( result => response.send(result.rows))
 		.catch( error => {
 			console.log(error)
 			response.send("OOPS! AN ERROR OCCURED.")
