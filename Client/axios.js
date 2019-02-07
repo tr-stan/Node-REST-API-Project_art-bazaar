@@ -38,10 +38,10 @@ const axios = require('axios')
 //     .catch(error => console.log("Get error occured", error.name, error))
 
 // Read: Get by id
-// axios
-// 	.get("http://localhost:9000/products/2")
-// 	.then(response => console.log("Product Search Results: ", response.data.rows))
-//     .catch(error => console.log("Get error occured", error.name, error))
+axios
+	.get("http://localhost:9000/products/2")
+	.then(response => console.log("Product Search Results: ", response.data.rows))
+    .catch(error => console.log("Get error occured", error.name, error))
 
 
 // Update: Put a product by id

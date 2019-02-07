@@ -90,6 +90,9 @@ Path
 			.catch(error => console.log("Get error occured", error.name, error))
 		```
 	- Response:
+		```
+		[ { username: 'trbenn', is_customer: true, is_artist: true } ]
+		```
 - PUT: Update User by ID
 	- Example:
 	- Response:
