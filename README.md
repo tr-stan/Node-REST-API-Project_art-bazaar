@@ -27,128 +27,128 @@ There are two main paths through which you can submit CRUD operations: User requ
 ### User Requests
 
 Path
-	: `/users`
-	- POST: Create User
-		- Parameters:
-			- username: [string],
-	        - is_customer: [boolean],
-	        - is_artist: [boolean],
-	        - bio: [string],
-	        - first_name: [string],
-	        - last_name: [string],
-	        - email: [string],
-	        - password: [string]
-	    - Example:
-	    	```
-		    axios
-			    .post('http://localhost:9000/users', {
-			        username: 'tritbene',
-			        is_customer: true,
-			        is_artist: true,
-			        bio: 'Also known as Tristan',
-			        first_name: 'Trit',
-			        last_name: 'Bené',
-			        email: 'tritbene@artsea.com',
-			        password: 'tr!tben3'
-		    })
-		    .then(response => console.log("New User Info: ", response.data.rows))
-		    .catch(error => console.log("User post error occured", error.name, error))
-		    ```
-		 - Response: Array of data (inserted into Users table and Users_Private table)
-		 	```
-			[ 'tritbene', true, true, 'Also known as Tristan' ]
-			[ 'tritbene', 'Trit', 'Bené', 'tritbene@artsea.com', 'tr!tben3' ]
-			```
-	- GET: Find All Users
-	    - Example:
-	    	```
-	    	axios
-				.get("http://localhost:9000/users")
-				.then(response => console.log(response.data.map(item => item)))
-				.catch(error => console.log("Get error occured", error.name, error))
-		    ```
-		 - Response: Array of User objects
-		 	```
-			[ { username: 'henri', is_customer: false, is_artist: true },
-			  { username: 'trbenn', is_customer: true, is_artist: true },
-			  { username: 'aluko', is_customer: true, is_artist: false },
-			  { username: 'leidich', is_customer: true, is_artist: false },
-			  { username: 'schex', is_customer: true, is_artist: false },
-			  { username: 'lane', is_customer: true, is_artist: false },
-			  { username: 'alfie', is_customer: false, is_artist: true },
-			  { username: 'trbenny', is_customer: true, is_artist: true },
-			  { username: 'tritbene', is_customer: true, is_artist: true } ]
-			```
+: `/users`
+- POST: Create User
+	- Parameters:
+		- username: [string],
+        - is_customer: [boolean],
+        - is_artist: [boolean],
+        - bio: [string],
+        - first_name: [string],
+        - last_name: [string],
+        - email: [string],
+        - password: [string]
+    - Example:
+    	```
+	    axios
+		    .post('http://localhost:9000/users', {
+		        username: 'tritbene',
+		        is_customer: true,
+		        is_artist: true,
+		        bio: 'Also known as Tristan',
+		        first_name: 'Trit',
+		        last_name: 'Bené',
+		        email: 'tritbene@artsea.com',
+		        password: 'tr!tben3'
+	    })
+	    .then(response => console.log("New User Info: ", response.data.rows))
+	    .catch(error => console.log("User post error occured", error.name, error))
+	    ```
+	 - Response: Array of data (inserted into Users table and Users_Private table)
+	 	```
+		[ 'tritbene', true, true, 'Also known as Tristan' ]
+		[ 'tritbene', 'Trit', 'Bené', 'tritbene@artsea.com', 'tr!tben3' ]
+		```
+- GET: Find All Users
+    - Example:
+    	```
+    	axios
+			.get("http://localhost:9000/users")
+			.then(response => console.log(response.data.map(item => item)))
+			.catch(error => console.log("Get error occured", error.name, error))
+	    ```
+	 - Response: Array of User objects
+	 	```
+		[ { username: 'henri', is_customer: false, is_artist: true },
+		  { username: 'trbenn', is_customer: true, is_artist: true },
+		  { username: 'aluko', is_customer: true, is_artist: false },
+		  { username: 'leidich', is_customer: true, is_artist: false },
+		  { username: 'schex', is_customer: true, is_artist: false },
+		  { username: 'lane', is_customer: true, is_artist: false },
+		  { username: 'alfie', is_customer: false, is_artist: true },
+		  { username: 'trbenny', is_customer: true, is_artist: true },
+		  { username: 'tritbene', is_customer: true, is_artist: true } ]
+		```
 Path
-	: `/users/:id`
-	- GET: Find User by ID
-	- PUT: Update User by ID
-	- DELETE: Delete User by ID
+: `/users/:id`
+- GET: Find User by ID
+- PUT: Update User by ID
+- DELETE: Delete User by ID
 		 	
 
 ### Product Requests
 
 Path
-	: `/products`
-	- POST: Create a Product
-		- Parameters:
-			- name: [string]
-			- artist: [string], not null
-				- references user, so you should enter the username of the artist
-			- is_artist: [boolean], not null
-			- bio: [string],
-			- first_name: [string], not null
-			- last_name: [string], not null
-			- email: [string], not null
-			- password: [string], not null
-		- Example:
+: `/products`
+- POST: Create a Product
+	- Parameters:
+		- name: [string]
+		- artist: [string], not null
+			- references user, so you should enter the username of the artist
+		- is_artist: [boolean], not null
+		- bio: [string],
+		- first_name: [string], not null
+		- last_name: [string], not null
+		- email: [string], not null
+		- password: [string], not null
+	- Example:
+		```
+		axios
+		.post('http://localhost:9000/products', {
+			name: 'Help!',
+			artist: 'trbenny',
+			category: 'Painting',
+			is_print: true,
+			price: 800.00,
+			description: 'A crazy coool cubist portrait'
+		})
+		.then(response => console.log("New Product Info: ", response.data.rows))
+		.catch(error => console.log("Product Post error occured", error.name, error))
+	    ```
+    - Response: Array of data (inserted into Products table)
+		```
+	 	[ 'Help!',
+			'trbenny',
+			'Painting',
+			true,
+			800,
+			'A crazy coool cubist portrait' ]
 			```
-			axios
-			.post('http://localhost:9000/products', {
-				name: 'Help!',
-				artist: 'trbenny',
-				category: 'Painting',
-				is_print: true,
-				price: 800.00,
-				description: 'A crazy coool cubist portrait'
-			})
-			.then(response => console.log("New Product Info: ", response.data.rows))
-			.catch(error => console.log("Product Post error occured", error.name, error))
-		    ```
-	    - Response: Array of data (inserted into Products table)
-			```
-		 	[ 'Help!',
-  			'trbenny',
-  			'Painting',
-  			true,
-  			800,
-  			'A crazy coool cubist portrait' ]
-  			```
-  	- GET: Find All Products
-  		- Example:
-  			```
-  			axios
-    			.get("http://localhost:9000/products")
-    			.then(response => console.log(response.data.map(item => item)))
-    			.catch(error => console.log("Get error occured", error.name, error))
-  			```
-  		- Response: Array of Product Objects
-  			```
-			[ { username: 'henri', is_customer: false, is_artist: true },
-			  { username: 'trbenn', is_customer: true, is_artist: true },
-			  { username: 'aluko', is_customer: true, is_artist: false },
-			  { username: 'leidich', is_customer: true, is_artist: false },
-			  { username: 'schex', is_customer: true, is_artist: false },
-			  { username: 'lane', is_customer: true, is_artist: false },
-			  { username: 'alfie', is_customer: false, is_artist: true },
-			  { username: 'trbenny', is_customer: true, is_artist: true },
-			  { username: 'tritbene', is_customer: true, is_artist: true } ]
-  			```
- Path
-	: `/products/:id`
-	- GET: Find Product by ID
-	- PUT: Update Product by ID
-	- DELETE: Delete Product by ID
+- GET: Find All Products
+	- Example:
+		```
+		axios
+		.get("http://localhost:9000/products")
+		.then(response => console.log(response.data.map(item => item)))
+		.catch(error => console.log("Get error occured", error.name, error))
+		```
+	- Response: Array of Product Objects
+		```
+	[ { username: 'henri', is_customer: false, is_artist: true },
+	  { username: 'trbenn', is_customer: true, is_artist: true },
+	  { username: 'aluko', is_customer: true, is_artist: false },
+	  { username: 'leidich', is_customer: true, is_artist: false },
+	  { username: 'schex', is_customer: true, is_artist: false },
+	  { username: 'lane', is_customer: true, is_artist: false },
+	  { username: 'alfie', is_customer: false, is_artist: true },
+	  { username: 'trbenny', is_customer: true, is_artist: true },
+	  { username: 'tritbene', is_customer: true, is_artist: true } ]
+		```
+Path
+: `/products/:id`
+- GET: Find Product by ID
+- PUT: Update Product by ID
+- DELETE: Delete Product by ID
 
 
 
