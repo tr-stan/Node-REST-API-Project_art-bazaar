@@ -134,16 +134,37 @@ Path
 		```
 	- Response: Array of Product Objects
 		```
-	[ { username: 'henri', is_customer: false, is_artist: true },
-	  { username: 'trbenn', is_customer: true, is_artist: true },
-	  { username: 'aluko', is_customer: true, is_artist: false },
-	  { username: 'leidich', is_customer: true, is_artist: false },
-	  { username: 'schex', is_customer: true, is_artist: false },
-	  { username: 'lane', is_customer: true, is_artist: false },
-	  { username: 'alfie', is_customer: false, is_artist: true },
-	  { username: 'trbenny', is_customer: true, is_artist: true },
-	  { username: 'tritbene', is_customer: true, is_artist: true } ]
-		```
+		[ { name: 'Head of a Boxer',
+	    category: 'Painting',
+	    is_print: true,
+	    price: '$800.00',
+	    description: 'A crazy coool cubist sculpture-painting',
+	    username: 'henri' },
+	  { name: 'Seated Woman',
+	    category: 'Painting',
+	    is_print: true,
+	    price: '$2,000.00',
+	    description: 'An illustrious portrait',
+	    username: 'henri' },
+	  { name: 'Head of a Young Girl',
+	    category: 'Sculpture',
+	    is_print: false,
+	    price: '$100,000.00',
+	    description: 'A marvelous cubist sculpture',
+	    username: 'henri' },
+	  { name: 'Man With Clarinet',
+	    category: 'Sculpture',
+	    is_print: false,
+	    price: '$100,000.00',
+	    description: 'An outstanding cubist sculpture.',
+	    username: 'henri' },
+	  { name: 'Céline Arnaud',
+	    category: 'painting',
+	    is_print: true,
+	    price: '$90,000.00',
+	    description: 'A beautiful cubist portrait of a lady.',
+	    username: 'henri' } ]
+	    ```
 Path
 : `/products/:id`
 - GET: Find Product by ID
