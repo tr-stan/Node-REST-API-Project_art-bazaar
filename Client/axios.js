@@ -54,15 +54,15 @@ const axios = require('axios')
 // 		price: 2000.00,
 // 		description: 'An illustrious portrait'
 // 	})
-// .then(response => console.log("Updated Product: ", response.data.rows))
-// .catch(error => console.log("Post error occured", error.name, error))
+// 	.then(response => console.log("Updated Product: ", response.data.rows))
+// 	.catch(error => console.log("Post error occured", error.name, error))
 
 
 // // Destroy: Delete product by id
 // axios
 // 	.delete('http://localhost:9000/products/3')
-	// .then(response => console.log("Deleted Product: ", response.data.rows))
-	// .catch(error => console.log("Post error occured", error.name, error))
+// 	.then(response => console.log("Deleted Product: ", response.data.rows))
+// 	.catch(error => console.log("Post error occured", error.name, error))
 
 
 // ======>USER REQUESTS<======
@@ -98,7 +98,7 @@ const axios = require('axios')
 // Update: Put a User by id
 
 // Destroy: Delete User by id
-// axios
-// 	.delete('http://localhost:9000/users/11')
-	// .then(response => console.log("Deleted User: ", response.data))
-	// .catch(error => console.log("Delete error occured", error.name, error))
+	// axios
+	// 	.delete('http://localhost:9000/users/11')
+	// 	.then(response => console.log("Deleted User: ", response.data.rows))
+	// 	.catch(error => console.log("Delete error occured", error.name, error))

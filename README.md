@@ -82,8 +82,26 @@ Path
 Path
 : `/users/:id`
 - GET: Find User by ID
+	- Example:
+		```
+		axios
+			.get("http://localhost:9000/users/2")
+			.then(response => console.log("User Search Results: ", response.data.rows))
+			.catch(error => console.log("Get error occured", error.name, error))
+		```
+	- Response:
 - PUT: Update User by ID
+	- Example:
+	- Response:
 - DELETE: Delete User by ID
+	- Example:
+		```
+		axios
+			.delete('http://localhost:9000/users/11')
+			.then(response => console.log("Deleted User: ", response.data.rows))
+			.catch(error => console.log("Delete error occured", error.name, error))
+		```
+	- Response:
 		 	
 
 ### Product Requests
@@ -123,7 +141,7 @@ Path
 			true,
 			800,
 			'A crazy coool cubist portrait' ]
-			```
+		```
 - GET: Find All Products
 	- Example:
 		```
@@ -168,8 +186,39 @@ Path
 Path
 : `/products/:id`
 - GET: Find Product by ID
+	- Example:
+		```
+		axios
+			.get("http://localhost:9000/products/2")
+			.then(response => console.log("Product Search Results: ", response.data.rows))
+			.catch(error => console.log("Get error occured", error.name, error))
+		```
+	- Response:
 - PUT: Update Product by ID
+	- Example:
+		```
+		axios
+			.put('http://localhost:9000/products/6', {
+				name: 'Seated Woman',
+				artist: 1,
+				category: 'Painting',
+				is_print: true,
+				price: 2000.00,
+				description: 'An illustrious portrait'
+				})
+			.then(response => console.log("Updated Product: ", response.data.rows))
+			.catch(error => console.log("Post error occured", error.name, error))
+		```
+	- Response:
 - DELETE: Delete Product by ID
+	- Example:
+		```
+		axios
+			.delete('http://localhost:9000/products/3')
+			.then(response => console.log("Deleted Product: ", response.data.rows))
+			.catch(error => console.log("Post error occured", error.name, error))
+		```
+	- Response:
 
 
 
