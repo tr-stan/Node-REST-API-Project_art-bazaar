@@ -93,16 +93,16 @@ Path
 	- POST: Create a Product
 		- Parameters:
 			- name: [string]
-	        - artist: [string], not null
-	        	- references user, so you should enter the username of the artist
-	        - is_artist: [boolean], not null
-	        - bio: [string],
-	        - first_name: [string], not null
-	        - last_name: [string], not null
-	        - email: [string], not null
-	        - password: [string], not null
-	    - Example:
-	    	```
+			- artist: [string], not null
+				- references user, so you should enter the username of the artist
+			- is_artist: [boolean], not null
+			- bio: [string],
+			- first_name: [string], not null
+			- last_name: [string], not null
+			- email: [string], not null
+			- password: [string], not null
+		- Example:
+			```
 			axios
 			.post('http://localhost:9000/products', {
 				name: 'Help!',
@@ -115,7 +115,7 @@ Path
 			.then(response => console.log("New Product Info: ", response.data.rows))
 			.catch(error => console.log("Product Post error occured", error.name, error))
 		    ```
-		- Response: Array of data (inserted into Products table)
+	    - Response: Array of data (inserted into Products table)
 			```
 		 	[ 'Help!',
   			'trbenny',
