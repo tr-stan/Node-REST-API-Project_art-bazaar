@@ -42,7 +42,7 @@ router.get('/:id', (request, response) => {
 // Create one product
 
 router.post('/', (request, response) => {
-    let text = 'INSERT INTO Products(name, artist, category, is_print, price, description) VALUES($1, $2, $3, $4, $5, $6)'
+    let text = 'INSERT INTO Products(name, artist, category, is_print, price, description) VALUES($1, (SELECT id FROM Users WHERE Users.username=$2), $3, $4, $5, $6)'
 
     let values = [request.body.name, request.body.artist, request.body.category, request.body.is_print, request.body.price, request.body.description]
     console.log(values)

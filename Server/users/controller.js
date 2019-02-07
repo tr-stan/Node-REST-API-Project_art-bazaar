@@ -32,8 +32,8 @@ router.get('/', (request, response) => {
 // Read: Get one User
 router.get('/:id', (request, response) => {
     let index = request.params.id
-    client.query(`SELECT Users.name, Users.is_customer, Users.is_artist FROM Users WHERE Users.id = ${index}`)
-        .then(result => response.send(result.rows[0]))
+    client.query(`SELECT Users.username, Users.is_customer, Users.is_artist FROM Users WHERE Users.id = ${index}`)
+        .then(result => response.send(result))
         .catch(error => {
             response.send("OOPS! AN ERROR OCCURED.", error.name, error)
         })
