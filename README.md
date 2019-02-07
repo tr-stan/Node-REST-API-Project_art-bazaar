@@ -40,6 +40,7 @@ Path
         - password: 'string'
     - Example:
     	```
+    	// POST: add new user
 	    axios
 	    .post('http://localhost:9000/users', {
 	        username: 'user',
