@@ -40,7 +40,7 @@ const axios = require('axios')
 // Read: Get by id
 axios
 	.get("http://localhost:9000/products/2")
-	.then(response => console.log("Product Search Results: ", response.data.rows))
+	.then(response => console.log("Product Search Results: ", response.data))
     .catch(error => console.log("Get error occured", error.name, error))
 
 

@@ -86,7 +86,7 @@ Path
 		```
 		axios
 			.get("http://localhost:9000/users/2")
-			.then(response => console.log("User Search Results: ", response.data.rows))
+			.then(response => console.log("User Search Results: ", response.data.row))
 			.catch(error => console.log("Get error occured", error.name, error))
 		```
 	- Response:
@@ -193,10 +193,18 @@ Path
 		```
 		axios
 			.get("http://localhost:9000/products/2")
-			.then(response => console.log("Product Search Results: ", response.data.rows))
+			.then(response => console.log("Product Search Results: ", response.data))
 			.catch(error => console.log("Get error occured", error.name, error))
 		```
 	- Response:
+		```
+		{ name: 'Céline Arnaud',
+		category: 'painting',
+		is_print: true,
+		price: '$90,000.00',
+		description: 'A beautiful cubist portrait of a lady.',
+		username: 'henri' }
+		```
 - PUT: Update Product by ID
 	- Example:
 		```
