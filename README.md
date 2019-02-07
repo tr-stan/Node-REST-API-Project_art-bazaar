@@ -38,6 +38,22 @@ Path
         - last_name: 'string',
         - email: 'string',
         - password: 'string'
+    - Example:
+    	```
+	    axios
+	    .post('http://localhost:9000/users', {
+	        username: 'user',
+	        is_customer: true,
+	        is_artist: false,
+	        bio: '',
+	        first_name: 'Nu',
+	        last_name: 'Youser',
+	        email: 'newyouser@artbazaar.com',
+	        password: '90n!ne'
+	    })
+	    .then(response => console.log(`New User Info: ${response.data}`))
+	    .catch(error => console.log("Post error occured", error.name, error))
+	    ```
 
 
 ### Product Requests
