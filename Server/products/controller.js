@@ -12,7 +12,7 @@ router.use(bodyParser.urlencoded({ extended: true }))
 router.use(bodyParser.json())
 
 // set up the PG module
-const connectionString = process.env.CONNECTION_STRING
+const connectionString = process.env.DATABSE_URL
 
 // instantiate new client
 const client = new Client({ connectionString })

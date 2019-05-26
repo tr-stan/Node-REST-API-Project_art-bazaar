@@ -24,7 +24,7 @@ app.use(morgan('dev'))
 app.use(compression())
 
 // set up the PG module
-const connectionString = `${process.env.CONNECTION_STRING}`
+const connectionString = `${process.env.DATABASE_URL}`
 
 // instantiate new client
 const client = new Client({ connectionString })
