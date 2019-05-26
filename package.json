@@ -1,26 +1,27 @@
 {
-  "name": "print-original-bazaar",
+  "name": "art-bazaar-node",
   "version": "1.0.0",
   "description": "e-commerce app for selling/buying art, both original pieces and prints",
   "main": "index.js",
   "scripts": {
-    "test": "echo 'Merhaba arkadaslar'",
     "start": "nodemon app.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tri-be/print-original-bazaar.git"
+    "url": "https://github.com/tri-be/Node-REST-API-Project_art-bazaar"
   },
   "author": "Tristan Bennett",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/tri-be/print-original-bazaar/issues"
+    "url": "https://github.com/tri-be/Node-REST-API-Project_art-bazaar/issues"
   },
-  "homepage": "https://github.com/tri-be/print-original-bazaar#readme",
+  "homepage": "https://github.com/tri-be/Node-REST-API-Project_art-bazaar#readme",
   "dependencies": {
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "compression": "^1.7.3",
+    "cors": "^2.8.5",
+    "dotenv": "^8.0.0",
     "express": "^4.16.4",
     "morgan": "^1.9.1",
     "nodemon": "^1.18.9",

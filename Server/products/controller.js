@@ -1,3 +1,6 @@
+// import .env variables from local environment configurations
+require('dotenv').config()
+
 // Products Controller
 const express = require('express')
 const bodyParser = require('body-parser')
@@ -9,7 +12,7 @@ router.use(bodyParser.urlencoded({ extended: true }))
 router.use(bodyParser.json())
 
 // set up the PG module
-const connectionString = 'postgresql://tristanbennett:@localhost:5432/art-bazaar'
+const connectionString = process.env.CONNECTION_STRING
 
 // instantiate new client
 const client = new Client({ connectionString })
@@ -21,18 +24,30 @@ client.connect()
 
 // Read/Get all products
 router.get('/', (request, response) => {
-    client.query("SELECT Products.name, Products.category, Products.is_print, Products.price, Products.description, Users.username FROM Products, Users WHERE Products.artist = Users.id")
+    client.query("SELECT Products.name, Products.category, Products.is_print, Products.price, Products.description, Products.id, Users_Private.first_name, Users_Private.last_name, Users_Private.public_id FROM Products, Users_Private WHERE Products.artist = Users_Private.public_id")
         .then(result => response.send(result.rows.map(item => item)))
         .catch(error => {
-            console.log(error)
+            console.log(error.message)
+            response.send("OOPS! AN ERROR OCCURED.", error.name, error)
+        })
+})
+
+// Read/Get all products from one artist
+router.get('/:artistID', (request, response) => {
+    let artist = request.params.artistID
+    client.query(`SELECT Products.name, Products.id, Products.category, Products.is_print, Products.price, Products.description, Products.id, Users_Private.first_name, Users_Private.last_name, Users_Private.public_id FROM Products, Users_Private WHERE Products.artist = Users_Private.public_id AND Users_Private.public_id = ${artist}`)
+        .then(result => response.send(result.rows.map(item => item)))
+        .catch(error => {
+            console.log(error.message)
             response.send("OOPS! AN ERROR OCCURED.", error.name, error)
         })
 })
 
 // Read/Get one product
-router.get('/:id', (request, response) => {
-    let index = request.params.id
-    client.query(`SELECT Products.name, Products.category, Products.is_print, Products.price, Products.description, Users.username FROM Products, Users WHERE Products.artist = Users.id AND Products.id = ${index}`)
+router.get('/:artistID/:productID', (request, response) => {
+    let artist = request.params.artistID
+    let index = request.params.productID
+    client.query(`SELECT Products.name, Products.id, Products.category, Products.is_print, Products.price, Products.description, Users_Private.first_name, Users_Private.last_name, Users_Private.public_id FROM Products, Users_Private WHERE Products.artist = Users_Private.public_id AND Products.id = ${index} AND Users_Private.public_id = ${artist}`)
         .then(result => response.send(result.rows[0]))
         .catch(error => {
             response.send("OOPS! AN ERROR OCCURED.", error.name, error)
@@ -73,13 +88,13 @@ router.put('/:id', (request, response) => {
 
 // Delete one product
 router.delete('/:id', (request, response) => {
-	let index = request.params.id
-	client.query(`DELETE from Products WHERE Products.id = ${index}`)
-		.then( result => response.send(result.rows))
-		.catch( error => {
-			console.log(error)
-			response.send("OOPS! AN ERROR OCCURED.")
-		})
+    let index = request.params.id
+    client.query(`DELETE from Products WHERE Products.id = ${index}`)
+        .then( result => response.send(result.rows))
+        .catch( error => {
+            console.log(error)
+            response.send("OOPS! AN ERROR OCCURED.")
+        })
 })
 
 module.exports = router

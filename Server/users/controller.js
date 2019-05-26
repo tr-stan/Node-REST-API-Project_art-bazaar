@@ -1,19 +1,23 @@
+// import .env variables from local environment configurations
+require('dotenv').config()
+
 // Products Controller
 const express = require('express')
 const bodyParser = require('body-parser')
 const { Client } = require('pg')
 
-let router = express.Router()
+const router = express.Router()
 
 router.use(bodyParser.urlencoded({ extended: true }))
 router.use(bodyParser.json())
 
 // set up the PG module
-const connectionString = 'postgresql://tristanbennett:@localhost:5432/art-bazaar'
+const connectionString = process.env.CONNECTION_STRING
 
 // instantiate new client
 const client = new Client({ connectionString })
 
+// connect to client
 client.connect()
     .then(() => { console.log(`Connection to controller pg client successful!`) })
     .catch(error => { console.log('Sorry it seems we are experiencing some issues. Please try again.') })
@@ -21,7 +25,8 @@ client.connect()
 
 // Read: Get all Users
 router.get('/', (request, response) => {
-    client.query("SELECT Users.username, Users.is_customer, Users.is_artist FROM Users")
+    const text = `SELECT Users.username, Users.img_url, Users.is_customer, Users.is_artist, Users.id, Users.bio, Users_Private.first_name, Users_Private.last_name  FROM Users, Users_Private Where Users.id = Users_Private.public_id`
+    client.query(text)
         .then(result => response.send(result.rows.map(item => item)))
         .catch(error => {
             console.log(error)
@@ -31,9 +36,11 @@ router.get('/', (request, response) => {
 
 // Read: Get one User
 router.get('/:id', (request, response) => {
-    let index = request.params.id
-    client.query(`SELECT Users.username, Users.is_customer, Users.is_artist FROM Users WHERE Users.id = ${index}`)
-        .then(result => response.send(result))
+    const index = request.params.id
+    const text = 'SELECT Users.username, Users.img_url, Users.is_customer, Users.is_artist, Users.bio, Users.id, Users_Private.first_name, Users_Private.last_name FROM Users, Users_Private WHERE Users.id = Users_Private.public_id AND Users.id = $1'
+    const value = [index]
+    client.query(text, value)
+        .then(result => response.send(result.rows[0]))
         .catch(error => {
             response.send("OOPS! AN ERROR OCCURED.", error.name, error)
         })
@@ -42,8 +49,8 @@ router.get('/:id', (request, response) => {
 // Create: Post one User's Public & Private Record
 
 router.post('/', (request, response) => {
-    let query = 'INSERT INTO Users(username, is_customer, is_artist, bio) VALUES($1, $2, $3, $4)'
-    let values = [request.body.username, request.body.is_customer, request.body.is_artist, request.body.bio]
+    const query = 'INSERT INTO Users(username, is_customer, is_artist, bio) VALUES($1, $2, $3, $4)'
+    const values = [request.body.username, request.body.is_customer, request.body.is_artist, request.body.bio]
     console.log(values)
     client.query(query, values)
         .then(() => {
@@ -65,11 +72,11 @@ router.post('/', (request, response) => {
 })
 
 // router.post('/', (request, response) => {
-// 	let query = 'INSERT INTO Users(username, is_customer, is_artist, bio) VALUES($1, $2, $3, $4)'
-// 	let values = [request.body.username, request.body.is_customer, request.body.is_artist, request.body.bio]
-// 	console.log(values)
-// 	client.query(query, values)
-// 		.then(result => response.send(result))
+//  let query = 'INSERT INTO Users(username, is_customer, is_artist, bio) VALUES($1, $2, $3, $4)'
+//  let values = [request.body.username, request.body.is_customer, request.body.is_artist, request.body.bio]
+//  console.log(values)
+//  client.query(query, values)
+//      .then(result => response.send(result))
 //         .catch(error => {
 //             console.log(error)
 //             response.send("OOPS! AN ERROR OCCURED WHEN ADDING USER DATA.", error.name, error)
@@ -88,54 +95,18 @@ router.post('/', (request, response) => {
 //         })
 // })
 
-// Update one User's public 
-// router.put('/:id', (request, response) => {
-//     let text = 'UPDATE Users SET username = $1, is_customer = $2, is_artist = $3 WHERE id = $4'
-//     let index = request.params.id
-//     let values = [request.body.username, request.body.is_customer, request.body.is_artist, index]
-//     client.query(text, values)
-//         .then(result => {
-//             console.log(result)
-//             response.send(result)
-//         })
-//         .catch(error => {
-//             console.log(error)
-//             response.send("OOPS! AN ERROR OCCURED.", error.name, error)
-//         })
-// })
-
 // Delete one User
-// router.delete('/:id', (request, response) => {
-//     let index = request.params.id
-//     client.query(`DELETE from Users, Users_Private WHERE Users.id = Users_Private.public_id AND Users.id = ${index}`)
-//         .then(result => response.send(result))
-//         .catch(error => {
-//             console.log(error)
-//             response.send("OOPS! AN ERROR OCCURED.", error.name, error)
-//         })
-// })
-
-// Delete One User's Public Data
-// router.delete('/:id', (request, response) => {
-//     let index = request.params.id
-//     client.query(`DELETE from Users WHERE Users.id = ${index}`)
-//         .then(result => response.send(result))
-//         .catch(error => {
-//             console.log(error)
-//             response.send("OOPS! AN ERROR OCCURED.", error.name, error)
-//         })
-// })
-
-// Delete One User's Private Data
-// router.delete('/:id', (request, response) => {
-//     let index = request.params.id
-//     client.query(`DELETE from Users_Private WHERE Users_Private.id = ${index}`)
-//         .then(result => response.send(result))
-//         .catch(error => {
-//             console.log(error)
-//             response.send("OOPS! AN ERROR OCCURED.", error.name, error)
-//         })
-// })
+router.delete('/:id', (request, response) => {
+    const index = request.params.id
+    const text = 'DELETE from Users, Users_Private WHERE Users.id = Users_Private.public_id AND Users.id = $1'
+    const value = [index]
+    client.query(text, value)
+        .then(result => response.send(result))
+        .catch(error => {
+            console.log(error)
+            response.send("OOPS! A DELETE ERROR OCCURED.", error.name, error.message, error)
+        })
+})
 
 
 module.exports = router
